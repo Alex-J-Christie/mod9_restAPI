@@ -4,7 +4,7 @@ const Order = defineOrder(sequelize);
 sequelize.sync();
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-const block_time = 1500;
+const block_time = 0;
 
 const addFormats = require('ajv-formats');
 const Ajv = require('ajv');
@@ -12,6 +12,7 @@ const ajv = new Ajv();
 addFormats(ajv);
 const schema = {
     type: 'object',
+    required: ['orderDate', 'orderPrice', 'orderStatus', 'customerAcct'],
     properties: {
         orderDate:    {type: 'string', format: "date"},
         orderPrice:   {type: 'number', minimum: 0.0},
